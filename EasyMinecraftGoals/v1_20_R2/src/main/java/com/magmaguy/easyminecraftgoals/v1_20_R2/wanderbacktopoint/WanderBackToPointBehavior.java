@@ -90,7 +90,7 @@ public class WanderBackToPointBehavior extends Behavior<LivingEntity> implements
         this.mob.getNavigation().moveTo(path, speed);
         mob.getBrain().setActiveActivityIfPossible(Activity.CORE);
         if (hardObjective) {
-            new BukkitRunnable() {
+            new com.magmaguy.easyminecraftgoals.utils.FoliaRunnable(livingEntity.getScheduler(), null) {
                 @Override
                 public void run() {
                     if (!livingEntity.isValid() ||
@@ -103,7 +103,7 @@ public class WanderBackToPointBehavior extends Behavior<LivingEntity> implements
                     }
                     mob.getNavigation().moveTo(path, speed);
                 }
-            }.runTaskTimer(NMSManager.pluginProvider, 0, 1);
+            }.runAtFixedRate(NMSManager.pluginProvider, 0, 1);
         }
     }
 

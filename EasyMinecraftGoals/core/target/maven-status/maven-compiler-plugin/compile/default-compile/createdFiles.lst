@@ -8,3 +8,4 @@ com\magmaguy\easyminecraftgoals\internal\AbstractWanderBackToPoint.class
 com\magmaguy\easyminecraftgoals\NMSManager.class
 com\magmaguy\easyminecraftgoals\events\WanderBackToPointEndEvent.class
 com\magmaguy\easyminecraftgoals\NMSAdapter.class
+com\magmaguy\easyminecraftgoals\utils\FoliaRunnable.class
