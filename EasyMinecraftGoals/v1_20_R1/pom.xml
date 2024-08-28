@@ -67,8 +67,8 @@
         <dependency>
             <groupId>com.magmaguy</groupId>
             <artifactId>EasyMinecraftGoals-core</artifactId>
-            <version>1.13.0</version>
-            <scope>compile</scope>
+            <version>1.13.1</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
