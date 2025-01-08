@@ -161,7 +161,7 @@ public abstract class AbstractPacketEntity<T extends Entity> implements PacketEn
     }
 
     public void teleport(Location location) {
-        entity.teleportTo(location.getX(), location.getY(), location.getZ());
+        entity.getBukkitEntity().teleportAsync(location);
         sendTeleportPacket();
     }
 

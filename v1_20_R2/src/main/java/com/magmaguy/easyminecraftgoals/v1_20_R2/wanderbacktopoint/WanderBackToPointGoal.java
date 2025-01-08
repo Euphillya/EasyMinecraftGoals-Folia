@@ -72,7 +72,7 @@ public class WanderBackToPointGoal extends Goal implements AbstractWanderBackToP
             this.path = null;
         }
         if (hardObjective && (pathfinderMob == null || pathfinderMob.isPathFinding()))
-            livingEntity.teleport(returnLocation);
+            livingEntity.teleportAsync(returnLocation);
         WanderBackToPointEndEvent wanderBackToPointEndEvent = new WanderBackToPointEndEvent(hardObjective, livingEntity, this);
         Bukkit.getPluginManager().callEvent(wanderBackToPointEndEvent);
         updateCooldown();
@@ -105,7 +105,7 @@ public class WanderBackToPointGoal extends Goal implements AbstractWanderBackToP
     }
 
     private void earlyPathfindingTermination() {
-        livingEntity.teleport(returnLocation);
+        livingEntity.teleportAsync(returnLocation);
         WanderBackToPointEndEvent wanderBackToPointEndEvent = new WanderBackToPointEndEvent(hardObjective, livingEntity, this);
         Bukkit.getPluginManager().callEvent(wanderBackToPointEndEvent);
     }

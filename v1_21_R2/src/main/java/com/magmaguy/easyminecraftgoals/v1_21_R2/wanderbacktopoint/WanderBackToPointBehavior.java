@@ -75,7 +75,7 @@ public class WanderBackToPointBehavior extends Behavior<LivingEntity> implements
         if (teleportOnFail) {
             if (path == null || !path.canReach()) {
                 path = null;
-                livingEntity.teleport(returnLocation);
+                livingEntity.teleportAsync(returnLocation);
                 WanderBackToPointEndEvent wanderBackToPointEndEvent = new WanderBackToPointEndEvent(hardObjective, livingEntity, this);
                 Bukkit.getPluginManager().callEvent(wanderBackToPointEndEvent);
                 return false;
@@ -90,7 +90,7 @@ public class WanderBackToPointBehavior extends Behavior<LivingEntity> implements
         this.mob.getNavigation().moveTo(path, speed);
         mob.getBrain().setActiveActivityIfPossible(Activity.CORE);
         if (hardObjective) {
-            new BukkitRunnable() {
+            new com.magmaguy.easyminecraftgoals.utils.FoliaRunnable(var1.getBukkitEntity().getScheduler(), null) {
                 @Override
                 public void run() {
                     if (!livingEntity.isValid() ||
@@ -98,19 +98,19 @@ public class WanderBackToPointBehavior extends Behavior<LivingEntity> implements
                             path == null ||
                             !path.canReach()) {
                         cancel();
-                        if (livingEntity.isValid() && (path == null || !path.canReach()) && teleportOnFail) livingEntity.teleport(returnLocation);
+                        if (livingEntity.isValid() && (path == null || !path.canReach()) && teleportOnFail) livingEntity.teleportAsync(returnLocation);
                         return;
                     }
                     mob.getNavigation().moveTo(path, speed);
                 }
-            }.runTaskTimer(NMSManager.pluginProvider, 0, 1);
+            }.runAtFixedRate(NMSManager.pluginProvider, 0, 1);
         }
     }
 
     @Override
     protected void stop(ServerLevel var0, LivingEntity var1, long var2) {
         path = null;
-        if (teleportOnFail && timedOut(maxDurationTicks)) livingEntity.teleport(returnLocation);
+        if (teleportOnFail && timedOut(maxDurationTicks)) livingEntity.teleportAsync(returnLocation);
         WanderBackToPointEndEvent wanderBackToPointEndEvent = new WanderBackToPointEndEvent(hardObjective, livingEntity, this);
         Bukkit.getPluginManager().callEvent(wanderBackToPointEndEvent);
         updateCooldown();
